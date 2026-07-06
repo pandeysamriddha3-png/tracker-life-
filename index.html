@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Joyboy Giveaway</title>
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Google RGB Color Strip -->
+    <div class="google-strip"></div>
+
+    <div id="app">
+        <!-- SCREEN 1: PASSCODE LOGIN -->
+        <section id="screen-login" class="screen active">
+            <div class="login-container">
+                <div class="logo-box">
+                    <svg viewBox="0 0 100 100" class="sun-god-logo">
+                        <!-- Stylized glowing sun with jumping silhouette inside -->
+                        <defs>
+                            <radialGradient id="sun-glow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#FFD700" stop-opacity="0.2"/>
+                                <stop offset="100%" stop-color="#FF4500" stop-opacity="0"/>
+                            </radialGradient>
+                        </defs>
+                        <circle cx="50" cy="50" r="45" fill="url(#sun-glow)" />
+                        <!-- Nika/Joyboy silhouette dynamic lines -->
+                        <path d="M50,20 C55,20 62,25 60,32 C58,38 45,40 42,48 C39,55 45,62 48,68 C42,75 35,68 38,58 C41,48 48,44 50,38 C52,32 45,28 40,32 C35,36 32,45 28,42 C24,39 28,28 35,23 C40,20 45,20 50,20 Z" fill="#FFFFFF" />
+                        <path d="M50,15 C70,15 85,30 85,50 C85,70 70,85 50,85 C30,85 15,70 15,50 C15,30 30,15 50,15 Z" fill="none" stroke="#FBBC05" stroke-width="2" stroke-dasharray="5 5" class="spinning-ring"/>
+                        <!-- Golden key overlay inside the sun -->
+                        <path d="M45,45 L55,45 L55,55 L45,55 Z" fill="none" />
+                    </svg>
+                </div>
+                <h1 class="app-title">JOYBOY GIVEAWAY</h1>
+                <p class="app-subtitle">Secure Access Control Portal</p>
+
+                <form id="login-form" class="login-form">
+                    <div class="input-group">
+                        <span class="material-symbols-outlined input-icon">vpn_key</span>
+                        <input type="password" id="passcode-input" placeholder="Enter passcode" required>
+                        <button type="button" id="toggle-passcode-visibility" class="btn-icon">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                    </div>
+                    <div id="login-error" class="error-msg hide">Incorrect passcode. Try again.</div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <span class="material-symbols-outlined btn-icon-left">lock_open</span>
+                        Verify Passcode
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- SCREEN 2: RECIPIENT DASHBOARD -->
+        <section id="screen-recipient" class="screen">
+            <header class="app-header">
+                <div class="header-left">
+                    <span class="pulse-indicator"></span>
+                    <h2>Joyboy Giveaways</h2>
+                </div>
+                <button id="btn-recipient-logout" class="btn-logout" title="Lock App">
+                    <span class="material-symbols-outlined">logout</span>
+                </button>
+            </header>
+
+            <main class="content-container">
+                <div class="section-title">Active Claimable Items</div>
+                <div id="recipient-items-container" class="items-list">
+                    <!-- Dynamic Items will be rendered here -->
+                </div>
+            </main>
+        </section>
+
+        <!-- SCREEN 3: ADMIN CONTROL PANEL -->
+        <section id="screen-admin" class="screen">
+            <header class="app-header">
+                <div class="header-left">
+                    <span class="pulse-indicator admin"></span>
+                    <h2>Admin Control Panel</h2>
+                </div>
+                <button id="btn-admin-logout" class="btn-logout" title="Lock App">
+                    <span class="material-symbols-outlined">logout</span>
+                </button>
+            </header>
+
+            <!-- Navigation Tabs -->
+            <nav class="tab-nav">
+                <button class="tab-btn active" data-tab="tab-active">
+                    <span class="material-symbols-outlined">list</span>
+                    <span>Active</span>
+                </button>
+                <button class="tab-btn" data-tab="tab-create">
+                    <span class="material-symbols-outlined">add_circle</span>
+                    <span>Create</span>
+                </button>
+                <button class="tab-btn" data-tab="tab-settings">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span>Settings</span>
+                </button>
+            </nav>
+
+            <main class="content-container">
+                <!-- TAB 1: ACTIVE ITEMS LIST -->
+                <div id="tab-active" class="tab-content active">
+                    <div class="section-header">
+                        <span id="active-count-label">Manage Active Items (0)</span>
+                    </div>
+                    <div id="admin-items-container" class="items-list">
+                        <!-- Dynamic Items will be rendered here -->
+                    </div>
+                </div>
+
+                <!-- TAB 2: CREATE GIVEAWAY -->
+                <div id="tab-create" class="tab-content">
+                    <div class="section-header">Select Giveaway Format</div>
+                    
+                    <div class="format-chips">
+                        <button class="chip active" data-format="ACCOUNT">Account 🔑</button>
+                        <button class="chip" data-format="TEXT">Secret Code 📝</button>
+                        <button class="chip" data-format="FILE">Upload File 📁</button>
+                    </div>
+
+                    <form id="create-item-form" class="form-container">
+                        <div class="form-group">
+                            <label for="item-title">Giveaway Title</label>
+                            <input type="text" id="item-title" placeholder="e.g. Netflix Premium, Steam Code" required>
+                        </div>
+
+                        <!-- ACCOUNT CONFIGURATION FIELDS -->
+                        <div id="fields-account" class="format-fields active">
+                            <div class="form-group">
+                                <label for="account-email">Email / Username</label>
+                                <input type="text" id="account-email" placeholder="e.g. user@gmail.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="account-password">Password</label>
+                                <input type="text" id="account-password" placeholder="e.g. SuperSecretKey123">
+                            </div>
+                            <div class="form-group">
+                                <label for="account-desc">Instructions / Rules (Optional)</label>
+                                <textarea id="account-desc" placeholder="e.g. Please do not modify account profiles." rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- SECRET CODE FIELDS -->
+                        <div id="fields-text" class="format-fields">
+                            <div class="form-group">
+                                <label for="text-body">Secret Code, Key or URL Link</label>
+                                <textarea id="text-body" placeholder="Paste Steam keys, links, passwords, emails, or instructions here..." rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- FILE UPLOAD FIELDS -->
+                        <div id="fields-file" class="format-fields">
+                            <div class="upload-dropzone" id="file-dropzone">
+                                <span class="material-symbols-outlined upload-icon">cloud_upload</span>
+                                <h3 id="upload-status-text">Click to Attach File</h3>
+                                <p>Choose documents, images, zip, pdf or config files.</p>
+                                <input type="file" id="file-input" style="display: none;">
+                            </div>
+                            <div id="file-attachment-card" class="file-card hide">
+                                <span class="material-symbols-outlined file-card-icon">draft</span>
+                                <div class="file-card-info">
+                                    <span class="file-label">Attached File</span>
+                                    <span id="attached-filename" class="file-name">filename.zip</span>
+                                </div>
+                                <button type="button" id="btn-remove-file" class="btn-icon">
+                                    <span class="material-symbols-outlined text-red">cancel</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="btn-submit-giveaway" class="btn btn-primary btn-block" disabled>
+                            <span class="material-symbols-outlined btn-icon-left">add_circle</span>
+                            POST GIVEAWAY ITEM
+                        </button>
+                    </form>
+                </div>
+
+                <!-- TAB 3: CONFIGURATION SETTINGS -->
+                <div id="tab-settings" class="tab-content">
+                    <div class="settings-card card-green">
+                        <div class="settings-card-header">
+                            <span class="material-symbols-outlined text-green">card_giftcard</span>
+                            <h3>Recipient Access Code</h3>
+                        </div>
+                        <p class="settings-card-desc">
+                            This is the passcode you share with winners. When they enter this code on the lock screen, they gain recipient access.
+                        </p>
+                        <div class="form-group">
+                            <input type="text" id="settings-recipient-pass" placeholder="Recipient Passcode">
+                        </div>
+                        <button id="btn-save-recipient-pass" class="btn btn-green">Update Code</button>
+                    </div>
+
+                    <div class="settings-card card-blue">
+                        <div class="settings-card-header">
+                            <span class="material-symbols-outlined text-blue">admin_panel_settings</span>
+                            <h3>Admin Passcode (Owner)</h3>
+                        </div>
+                        <p class="settings-card-desc">
+                            This is your personal passcode to enter this admin panel. Do not share it with recipients!
+                        </p>
+                        <div class="form-group">
+                            <input type="text" id="settings-admin-pass" placeholder="Admin Passcode">
+                        </div>
+                        <button id="btn-save-admin-pass" class="btn btn-blue">Update Code</button>
+                    </div>
+                </div>
+            </main>
+        </section>
+    </div>
+
+    <!-- Central Toast System -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Supabase JS SDK — must load before app.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
